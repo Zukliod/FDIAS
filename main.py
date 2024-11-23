@@ -7,6 +7,7 @@ import os
 input_video_path = 'input/4.mp4'
 output_video_path = 'output/4.mp4'
 database_path = 'database/'  # Folder containing images of known people
+family_members = ["family_member_1.jpg", "family_member_2.jpg"]  # Add your family members' images
 
 # Load YOLO Models
 model_person = YOLO("yolov8n.pt")
@@ -17,7 +18,7 @@ cap = cv2.VideoCapture(input_video_path)
 if not cap.isOpened():
     raise Exception("Error: Could not open video file.")
 
-# Video properties
+# Video propertiespip
 frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv2.CAP_PROP_FPS))
@@ -40,11 +41,16 @@ def recognize_face(face_image):
         # Use DeepFace for face recognition
         result = DeepFace.find(temp_face_path, db_path=database_path, enforce_detection=False)
         
-        # If a match is found, return the identity
+        # Check if the recognized face is a family member
         if len(result) > 0:
             identity = result[0]['identity']
-            return identity
+            if os.path.basename(identity) in family_members:
+                return os.path.basename(identity)
+            else:
+                print(f"Intruder Alert! Unknown person detected: {identity}")
+                return "Intruder"
         else:
+            print("Intruder Alert! No match found.")
             return "Unknown"
     except Exception as e:
         print(f"Error in face recognition: {e}")
