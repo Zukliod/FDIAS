@@ -20,12 +20,17 @@ for person_folder in os.listdir(unknown_dir):
                     enforce_detection=False,
                     model_name='Facenet512',
                     distance_metric='euclidean_l2',
-                    threshold=0.9,
+                    threshold=1.0,
                     silent=True
                 )
 
                 if len(faces) > 0:
                     for face in faces:
+                        # # Check if the face size is above a certain threshold
+                        # if face['region']['w'] < 50 or face['region']['h'] < 50:
+                           
+                        #     continue
+
                         if(face.empty):
                             print(face)
                             tel.bot.send_photo(
@@ -38,6 +43,7 @@ for person_folder in os.listdir(unknown_dir):
                         name = face['identity'][0].split('/')[3].upper()
                         distance = face['distance'][0]
                         threshold = face['threshold'][0]
+
                         print(f"Frame {frame_file} matched with: {name} with distance: {distance} and threshold: {threshold}")
                 
                 os.remove(frame_path)
