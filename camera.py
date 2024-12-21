@@ -1,5 +1,5 @@
 import datetime
-from sort import SortTracker as Sort
+from sort.tracker import SortTracker
 import numpy as np
 from ultralytics import YOLO
 import subprocess
@@ -10,7 +10,7 @@ import atexit
 from core.tools import is_far, is_moving
 
 facemodel = YOLO('./storage/yolov11n-face.pt')
-sort = Sort(max_age=5)
+sort = SortTracker(max_age=5)
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
