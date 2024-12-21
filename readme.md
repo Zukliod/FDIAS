@@ -6,7 +6,11 @@ The Home Security System uses AI and video surveillance to enhance home safety b
     ```
     python -m venv venv
     ```
-2. Install Required Packages
+2. Enter virtual environment
+   ```
+   ./venv/Scripts/activate
+   ```
+3. Install Required Packages
     ```
     pip install deepface
     pip install tf_keras
@@ -15,11 +19,11 @@ The Home Security System uses AI and video surveillance to enhance home safety b
     pip install sort-track
     pip install python-dotenv
     ```
-3. Or instead of running each command, you can use requirement.txt
+4. Or instead of running each command, you can use requirement.txt
     ```
     pip install -r requirements.txt
     ```
-4. Create .env file & paste this content
+5. Create .env file & paste this content
     ```
     TOKEN=telegramtoken
     DEVICE=0
