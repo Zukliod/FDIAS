@@ -1,8 +1,8 @@
-customtkinter==5.2.2
 deepface==0.0.93
-numpy==1.25.2
-opencv_python==4.10.0.84
-pillow==11.0.0
+tf_keras==2.18.0
 pyTelegramBotAPI==4.25.0
-sort-track==0.0.8
 ultralytics==8.3.52
+sort_track==0.0.8
+python-dotenv==1.0.1
+customtkinter==5.2.2
+python-dotenv

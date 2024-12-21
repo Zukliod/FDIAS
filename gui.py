@@ -83,7 +83,7 @@ class FDIAS(ctx.CTk):
         if file_path:
             name = ctx.CTkInputDialog(title="Enter name", text="Please enter the name of the person:")
             person_name = name.get_input().lower()
-            person_dir = os.path.join("./faces", person_name)
+            person_dir = os.path.join("./storage/faces", person_name)
             os.makedirs(person_dir, exist_ok=True)
             image = Image.open(file_path)
             image.save(os.path.join(person_dir, os.path.basename(file_path)))

@@ -1,8 +1,11 @@
 import os
 from deepface import DeepFace
 from core.bot import TelegramBot
+from dotenv import load_dotenv
 
-tel = TelegramBot("7388563799:AAGlUqVQyW5RCHcAoZ1jNccomX2WeAf7D64")
+load_dotenv()
+
+tel = TelegramBot(os.getenv("TOKEN"))
 tel.run()
 
 unknown_dir = './storage/unknown/'
@@ -26,11 +29,6 @@ for person_folder in os.listdir(unknown_dir):
 
                 if len(faces) > 0:
                     for face in faces:
-                        # # Check if the face size is above a certain threshold
-                        # if face['region']['w'] < 50 or face['region']['h'] < 50:
-                           
-                        #     continue
-
                         if(face.empty):
                             print(face)
                             tel.bot.send_photo(
@@ -40,7 +38,7 @@ for person_folder in os.listdir(unknown_dir):
                             )
                             continue
 
-                        name = face['identity'][0].split('/')[3].upper()
+                        name = face['identity'][0]
                         distance = face['distance'][0]
                         threshold = face['threshold'][0]
 

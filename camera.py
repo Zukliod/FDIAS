@@ -6,8 +6,10 @@ import subprocess
 import cv2
 import os
 import atexit
-
+from dotenv import load_dotenv
 from core.tools import is_far, is_moving
+
+load_dotenv()
 
 facemodel = YOLO('./storage/yolov11n-face.pt')
 sort = SortTracker(max_age=5)
@@ -45,7 +47,8 @@ while cap.isOpened():
         previous_frame = frame
 
         if process == None or process.poll() is not None:
-            process = subprocess.Popen(["python3", "monitor.py"])
+            python_executable = os.path.join("./venv", "bin", "python") if os.name != "nt" else os.path.join("./venv", "Scripts", "python.exe")
+            process = subprocess.Popen([python_executable, "monitor.py"])
 
         results_face = facemodel.predict(source=frame, save=False, conf=0.5, verbose=False)
         face_boxes = results_face[0].boxes.data.tolist()

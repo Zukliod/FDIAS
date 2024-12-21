@@ -14,7 +14,7 @@ def is_blurry(image, threshold=100):
     laplacian_var = cv2.Laplacian(gray, cv2.CV_64F).var()
     return laplacian_var < threshold
 
-def is_far(image, face_box, min_face_area=30000):
+def is_far(image, face_box, min_face_area=10000):
     x1, y1, x2, y2 = face_box
     face_area = (x2 - x1) * (y2 - y1)
     return face_area < min_face_area
