@@ -20,7 +20,7 @@ for person_folder in os.listdir(unknown_dir):
                     enforce_detection=False,
                     model_name='Facenet512',
                     distance_metric='euclidean_l2',
-                    threshold=1.0,
+                    threshold=0.9,
                     silent=True
                 )
 
