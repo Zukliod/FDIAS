@@ -39,6 +39,10 @@ while cap.isOpened():
         break
 
     frame_count += 1
+
+    # if frame_count % 2 == 0:
+    #     continue
+
     if frame_count < 5: continue
 
     if previous_frame is not None and is_moving(previous_frame, frame):
@@ -58,7 +62,7 @@ while cap.isOpened():
                 x, y, w, h = box.astype(int)
 
                 if is_far(frame, (x, y, (x + w), (y + h))):
-                    print("FACE TOO FAR")
+                    # print("FACE TOO FAR")
                     continue
 
                 lefteye = int(kp[0 * 3])
@@ -71,7 +75,7 @@ while cap.isOpened():
                 eye_difference = abs(lefteye - righteye)
                 
                 if eye_difference <= eye_threshold:
-                    print("NOT LOOKING", eye_difference)
+                    # print("NOT LOOKING", eye_difference)
                     continue
 
                 detections.append([x, y, x + w, y + h, score, 0])
